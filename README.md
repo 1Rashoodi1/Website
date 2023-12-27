@@ -5,7 +5,7 @@ Welcome and thanks hopping on my GitHub Page...
 
 To get to the main attraction please follow this link
 
-<a href="/Untitled3.html"> Meeeeeee </a>
+<a href="Website/Untitled3.html"> Meeeeeee </a>
 
 Cheers and love <3
 Rashid Janahi
