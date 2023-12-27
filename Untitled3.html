@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eduRJ - Your Educational Platform</title>
+</head>
+
+<body style="font-family: 'Arial', sans-serif; background-color: #f3f3f3; color: #333; margin: 0; padding: 0;">
+
+    <header style="background-color: #3498db; color: white; text-align: center; padding: 20px;">
+        <h1>eduRJ - Your Educational Platform</h1>
+    </header>
+
+    <nav style="background-color: #333; color: white; text-align: center; padding: 10px;">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: inline-block; margin-right: 10px;" onmouseover="showTooltip('Explore the home page for a warm welcome and essential information.');" onmouseout="hideTooltip()"><a href="#" onclick="navigateToSection('home')" style="text-decoration: none; color: white;">Home</a></li>
+            <li style="display: inline-block; margin-right: 10px;" onmouseover="showTooltip('Browse our available courses and embark on a learning journey.');" onmouseout="hideTooltip()"><a href="#" onclick="navigateToSection('courses')" style="text-decoration: none; color: white;">Courses</a></li>
+            <li style="display: inline-block; margin-right: 10px;" onmouseover="showTooltip('Learn more about us and our mission in providing quality education.');" onmouseout="hideTooltip()"><a href="#" onclick="navigateToSection('about')" style="text-decoration: none; color: white;">About Us</a></li>
+            <li style="display: inline-block; margin-right: 10px;" onmouseover="showTooltip('Get in touch with us. We are here to assist you.');" onmouseout="hideTooltip()"><a href="#" onclick="navigateToSection('contact')" style="text-decoration: none; color: white;">Contact</a></li>
+            <li style="display: inline-block; margin-right: 10px;" onmouseover="showTooltip('Login to access exclusive features and track your progress.');" onmouseout="hideTooltip()"><a href="#" onclick="showLogin()" style="text-decoration: none; color: white;">Login</a></li>
+        </ul>
+        <div id="tooltip" style="position: absolute; background-color: #333; color: white; padding: 5px; display: none;"></div>
+    </nav>
+
+    <section id="home" style="padding: 20px; display: block;">
+        <h2>Welcome to eduRJ - Your Educational Platform</h2>
+        <p>Empowering learners through quality education!</p>
+        <p>Explore our courses, discover a world of knowledge, and enhance your skills.</p>
+        <p>Join us on a journey of lifelong learning.</p>
+        <p>Enroll now and unlock a brighter future!</p>
+    </section>
+
+    <section id="courses" style="padding: 20px; display: none;">
+        <h2>Available Courses</h2>
+        <!-- Add a list of available courses or any relevant information -->
+    </section>
+
+    <section id="about" style="padding: 20px; display: none;">
+        <h2>About Us</h2>
+        <!-- Add information about your educational platform -->
+    </section>
+
+    <section id="contact" style="padding: 20px; display: none;">
+        <h2>Contact Us</h2>
+        <p>Phone: 39936558</p>
+        <p>Email: rshostingteam@gmail.com</p>
+    </section>
+
+    <section id="loginSection" style="padding: 50px; display: none; text-align: center;">
+        <!-- Login Section -->
+        <div style="max-width: 400px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);">
+            <h2 style="color: #232f3e;">Login</h2>
+            <form onsubmit="checkCredentials(); return false;">
+                <label for="username" style="display: block; margin-bottom: 10px; color: #555;">Username:</label>
+                <input type="text" id="username" name="username" required style="width: 100%; padding: 15px; box-sizing: border-box; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                <label for="password" style="display: block; margin-bottom: 10px; color: #555;">Password:</label>
+                <input type="password" id="password" name="password" required style="width: 100%; padding: 15px; box-sizing: border-box; margin-bottom: 30px; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="submit" value="Login" style="background-color: #ff9900; color: white; padding: 15px; border: none; cursor: pointer; border-radius: 5px; font-weight: bold;">
+            </form>
+        </div>
+    </section>
+
+    <section id="attendanceTracker" style="padding: 20px; display: none;">
+        <!-- Add your attendance tracker content here -->
+        <h2>Attendance Tracker</h2>
+        <form id="attendanceForm" onsubmit="handleAttendanceSubmit(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="attended">Attended:</label>
+            <input type="checkbox" id="attended" name="attended" value="Yes">
+            <label for="level">Level:</label>
+            <input type="text" id="level" name="level" required>
+            <label for="room">Room:</label>
+            <input type="text" id="room" name="room" required>
+            <input type="submit" value="Add Attendance">
+        </form>
+        <table id="attendanceTable" border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Attended</th>
+                    <th>Level</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Existing attendance records go here -->
+            </tbody>
+        </table>
+        <button onclick="exportToCSV()">Export to CSV</button>
+    </section>
+
+    <footer style="background-color: #333; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%;">
+        <p>&copy; 2023 eduRJ - Your Educational Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function checkCredentials() {
+            var usernameInput = document.getElementById('username').value;
+            var passwordInput = document.getElementById('password').value;
+
+            if (usernameInput === '120203979' && passwordInput === '120203979') {
+                alert('Login successful! Redirecting to the attendance tracker.');
+                showAttendanceTracker();
+            } else {
+                alert('Incorrect username or password. You are being redirected!');
+                window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+            }
+        }
+
+        function showTooltip(text) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = text;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').style.display = 'none';
+        }
+
+        function handleAttendanceSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const attended = document.getElementById('attended').checked ? 'Yes' : 'No';
+            const level = document.getElementById('level').value;
+            const room = document.getElementById('room').value;
+            const table = document.getElementById('attendanceTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow(table.rows.length);
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            cell1.textContent = name;
+            cell2.textContent = attended;
+            cell3.textContent = level;
+            cell4.textContent = room;
+            document.getElementById('attendanceForm').reset();
+        }
+
+        function exportToCSV() {
+            const table = document.getElementById('attendanceTable');
+            const rows = table.getElementsByTagName('tr');
+            let csvContent = 'data:text/csv;charset=utf-8,';
+
+            const headers = Array.from(rows[0].getElementsByTagName('th')).map(header => header.textContent);
+            csvContent += headers.join(',') + '\n';
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const rowData = Array.from(cells).map(cell => cell.textContent);
+                csvContent += rowData.join(',') + '\n';
+            }
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.href = encodedUri;
+            link.download = 'attendance.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        document.getElementById('attendanceForm').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                handleAttendanceSubmit(event);
+            }
+        });
+
+        function showLogin() {
+            hideAllSections();
+            document.getElementById('loginSection').style.display = 'block';
+        }
+
+        function showAttendanceTracker() {
+            hideAllSections();
+            document.getElementById('attendanceTracker').style.display = 'block';
+            return false; // Prevent form submission for now
+        }
+
+        function navigateToSection(sectionId) {
+            hideAllSections();
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function hideAllSections() {
+            const sections = ['home', 'courses', 'about', 'contact', 'loginSection', 'attendanceTracker'];
+            sections.forEach(sectionId => {
+                document.getElementById(sectionId).style.display = 'none';
+            });
+        }
+    </script>
+
+</body>
+
+</html>
