@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eduRJ - A Pinnacle in Educational Excellence</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        section {
+            padding: 20px;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #ff9900;
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e68300;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>eduRJ - A Pinnacle in Educational Excellence</h1>
+    </header>
+
+    <nav class="container">
+        <a href="#" onclick="navigateToSection('home')">Home</a>
+        <a href="#" onclick="navigateToSection('courses')">Courses</a>
+        <a href="#" onclick="navigateToSection('about')">About Us</a>
+        <a href="#" onclick="navigateToSection('contact')">Contact</a>
+        <a href="#" onclick="showLogin()">Login</a>
+    </nav>
+
+    <section id="home" class="container active">
+        <h2>Welcome to eduRJ - A Pinnacle in Educational Excellence</h2>
+        <p>Empowering learners through cutting-edge education!</p>
+        <p>Explore our courses, engage with advanced features, and unlock a world of knowledge.</p>
+        <p>Join us in shaping the future of education!</p>
+        <!-- Placeholder for AI integration -->
+        <p id="aiMessage" style="color: #3498db; font-weight: bold;"></p>
+    </section>
+
+    <section id="courses" class="container">
+        <h2>Explore Our Courses</h2>
+        <!-- Add a list of available courses or any relevant information -->
+        <!-- Integrate advanced filters and dynamic content as mentioned in the overview -->
+    </section>
+
+    <section id="about" class="container">
+        <h2>About eduRJ</h2>
+        <!-- Add comprehensive information about your educational platform -->
+        <!-- Incorporate interactive timeline and team biographies as per the overview -->
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact Us</h2>
+        <p>Phone: 39936558</p>
+        <p>Email: rshostingteam@gmail.com</p>
+    </section>
+
+    <section id="loginSection" class="container" style="display: none;">
+        <!-- Add your login section content here -->
+        <div>
+            <h2>Login</h2>
+            <form onsubmit="checkCredentials(); return false;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </section>
+
+    <section id="attendanceTracker" class="container" style="display: none;">
+        <h2>Attendance Tracker</h2>
+        <form id="attendanceForm" onsubmit="handleAttendanceSubmit(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="attended">Attended:</label>
+            <input type="checkbox" id="attended" name="attended" value="Yes">
+            <label for="level">Level:</label>
+            <input type="text" id="level" name="level" required>
+            <label for="room">Room:</label>
+            <input type="text" id="room" name="room" required>
+            <input type="submit" value="Add Attendance">
+        </form>
+        <table id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Attended</th>
+                    <th>Level</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Existing attendance records go here -->
+            </tbody>
+        </table>
+        <button onclick="exportToCSV()">Export to CSV</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 eduRJ - A Pinnacle in Educational Excellence. All rights reserved.</p>
+        <!-- Include links to social media channels for extended engagement as per the overview -->
+    </footer>
+
+    <script>
+        // Navigation functions
+        function navigateToSection(sectionId) {
+            hideAllSections();
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function showLogin() {
+            hideAllSections();
+            document.getElementById('loginSection').style.display = 'block';
+        }
+
+        function hideAllSections() {
+            const sections = ['home', 'courses', 'about', 'contact', 'loginSection', 'attendanceTracker'];
+            sections.forEach(sectionId => {
+                document.getElementById(sectionId).style.display = 'none';
+            });
+        }
+
+        // Existing functions
+
+        function checkCredentials() {
+            var usernameInput = document.getElementById('username').value;
+            var passwordInput = document.getElementById('password').value;
+
+            if (usernameInput === '120203979' && passwordInput === '120203979') {
+                alert('Login successful! Redirecting to the attendance tracker.');
+                showAttendanceTracker();
+            } else {
+                alert('Incorrect username or password. You are being redirected!');
+                window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+            }
+        }
+
+        function showAttendanceTracker() {
+            hideAllSections();
+            document.getElementById('attendanceTracker').style.display = 'block';
+            return false; // Prevent form submission for now
+        }
+
+        function handleAttendanceSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const attended = document.getElementById('attended').checked ? 'Yes' : 'No';
+            const level = document.getElementById('level').value;
+            const room = document.getElementById('room').value;
+            const table = document.getElementById('attendanceTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow(table.rows.length);
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            cell1.textContent = name;
+            cell2.textContent = attended;
+            cell3.textContent = level;
+            cell4.textContent = room;
+            document.getElementById('attendanceForm').reset();
+        }
+
+        function exportToCSV() {
+            const table = document.getElementById('attendanceTable');
+            const rows = table.getElementsByTagName('tr');
+            let csvContent = 'data:text/csv;charset=utf-8,';
+
+            const headers = Array.from(rows[0].getElementsByTagName('th')).map(header => header.textContent);
+            csvContent += headers.join(',') + '\n';
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const rowData = Array.from(cells).map(cell => cell.textContent);
+                csvContent += rowData.join(',') + '\n';
+            }
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.href = encodedUri;
+            link.download = 'attendance.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Gesture Controls
+        let xStart = null;
+        let yStart = null;
+
+        function handleTouchStart(event) {
+            xStart = event.touches[0].clientX;
+            yStart = event.touches[0].clientY;
+        }
+
+        function handleTouchMove(event) {
+            if (!xStart || !yStart) {
+                return;
+            }
+
+            const xEnd = event.touches[0].clientX;
+            const yEnd = event.touches[0].clientY;
+
+            const xDiff = xStart - xEnd;
+            const yDiff = yStart - yEnd;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                if (xDiff > 0) {
+                    // Swipe left
+                    navigateToSection('courses');
+                } else {
+                    // Swipe right
+                    navigateToSection('home');
+                }
+            } else {
+                if (yDiff > 0) {
+                    // Swipe up
+                    // You can add custom action for swipe up if needed
+                } else {
+                    // Swipe down
+                    // You can add custom action for swipe down if needed
+                }
+            }
+
+            // Reset values
+            xStart = null;
+            yStart = null;
+        }
+
+        // Biometric Authentication
+        function authenticateWithBiometrics() {
+            // Add your biometric authentication logic here
+            // You may use libraries or APIs for biometric authentication
+            alert('Biometric authentication initiated. Verify using your fingerprint or face.');
+        }
+
+        // Future Enhancements
+
+        // Blockchain Integration
+        // Placeholder for blockchain integration
+        function integrateBlockchain() {
+            // Add your blockchain integration logic here
+            alert('Blockchain integration under consideration for secure academic record-keeping.');
+        }
+
+        // Augmented Reality Classroom
+        // Placeholder for augmented reality classroom
+        function exploreAugmentedReality() {
+            // Add your augmented reality logic here
+            alert('Exploring possibilities of an augmented reality classroom for immersive learning.');
+        }
+
+        // AI Integration
+        function integrateAI() {
+            alert('Welcome to eduRJ! AI is here to enhance your learning experience.');
+        }
+    </script>
+
+</body>
+
+</html>
